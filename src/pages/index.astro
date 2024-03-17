@@ -1,0 +1,161 @@
+---
+import Card from "../components/card.astro";
+
+const sections = [
+  {
+    title: "Continue learning",
+    count: 20,
+  },
+  {
+    title: "Basic Guitar",
+    count: 14,
+  },
+  {
+    title: "Intermediate Guitar",
+    count: 10,
+  },
+  {
+    title: "Advanced Guitar",
+    count: 5,
+  },
+  {
+    title: "Basic Violin",
+    count: 14,
+  },
+  {
+    title: "Intermediate Violin",
+    count: 10,
+  },
+  {
+    title: "Advanced Violin",
+    count: 5,
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body class="bg-black p-4">
+    <nav
+      class="fixed top-0 z-50 w-full px-4 py-2 bg-gradient-to-b from-black to-transparent"
+    >
+      <div class="max-w-7xl mx-auto flex flex-row justify-between">
+        <div class="flex flex-row gap-4">
+          <img
+            src="/master-music-method.png"
+            alt="Master Music Method"
+            class="w-24"
+          />
+          <ul class="flex gap-4 items-center justify-between space-x-4 text-sm">
+            <li class="font-bold">
+              <a
+                href="/"
+                class="text-white hover:text-slate-500 transition-all duration-300"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="/about"
+                class="text-white hover:text-slate-500 transition-all duration-300"
+              >
+                Lesson Plans
+              </a>
+            </li>
+            <li>
+              <a
+                href="/blog"
+                class="text-white hover:text-slate-500 transition-all duration-300"
+              >
+                Support
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div
+      class="w-screen h-[calc(100vh-72px)] pt-[96px] bg-cover bg-center bg-no-repeat relative brightness-150"
+      style="background-image: url('violin-closeup.jpg')"
+    >
+      <div
+        class="bg-gradient-to-b from-transparent via-transparent to-black h-full w-full"
+      >
+        <div
+          class="flex flex-row items-center max-w-7xl mx-auto px-4 py-8 space-x-4 h-full"
+        >
+          <div class="flex flex-col gap-2 -mt-24">
+            <span class="bg-white rounded-xl px-2 w-fit text-sm"
+              >New for you</span
+            >
+            <h1
+              class="text-6xl font-bold text-white text-center drop-shadow-sm"
+            >
+              Advanced Violin
+            </h1>
+            <p class="text-white drop-shadow-sm">
+              J.P teaches you how to play the violin like a pro
+            </p>
+            <button
+              class="px-4 py-2 bg-white rounded-lg text-black w-fit mt-6 hover:bg-white/50"
+            >
+              Start Watching
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main class="-mt-24 relative z-10 overflow-hidden">
+      {
+        sections.map((section) => (
+          <div class="">
+            <div class="flex flex-row justify-between items-center pt-8 pb-4">
+              <div class="flex flex-col max-w-7xl mx-auto w-full">
+                <h2 class="flex flex-row items-center gap-2 text-2xl font-bold text-white/90">
+                  {section.title}{" "}
+                  <span class="bg-white/20 p-1 rounded-full text-xs">
+                    {section.count}
+                  </span>
+                </h2>
+                <p class="text-white" />
+              </div>
+            </div>
+            <div class="flex flex-wrap md:flex-nowrap flex-row gap-4 grid-rows-1 md:h-56 w-screen -mx-4 [&>:first-child]:ml-64">
+              <Card src="/jp-cormier-fiddle-mandolin.jpg" />
+              <Card src="https://source.unsplash.com/random/900×700/?music" />
+              <Card src="https://source.unsplash.com/random/900×700/?guitar" />
+              <Card src="https://source.unsplash.com/random/900×700/?band" />
+              <Card src="https://source.unsplash.com/random/900×700/?musician" />
+              <Card src="https://source.unsplash.com/random/900×700/?musical" />
+            </div>
+          </div>
+        ))
+      }
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const nav = document.querySelector("nav");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 0) {
+            nav.classList.add("bg-black/50");
+            nav.classList.add("backdrop-blur-md");
+            nav.classList.remove("bg-transparent");
+          } else {
+            nav.classList.remove("bg-black/50");
+            nav.classList.remove("backdrop-blur-md");
+            nav.classList.add("bg-transparent");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

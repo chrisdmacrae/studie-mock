@@ -1,0 +1,23 @@
+---
+const { src } = Astro.props;
+---
+
+<div
+  class="cursor-pointer relative min-w-[20rem] w-full hover:scale-125 hover:brightness-150 transition-all duration-300 hover:drop-shadow-xl hover:z-20"
+>
+  <div
+    class="relative aspect-video h-48 w-full p-6 rounded-xl overflow-hidden flex flex-row items-end bg-cover hover:scale-110 transition-all duration-300 translate-y-0"
+    style={{ backgroundImage: `url(${src})`, transform: "translateZ(0)" }}
+  >
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50"
+    >
+    </div>
+    <h2 class="text-xl font-bold text-white drop-shadow-lg">Video title</h2>
+  </div>
+  <div
+    class="h-1 bg-red-800 rounded-full mt-2"
+    style={{ width: Math.random() * 100 + "%" }}
+  >
+  </div>
+</div>
