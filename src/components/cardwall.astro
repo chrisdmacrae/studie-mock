@@ -108,44 +108,46 @@ import Card from "../components/card.astro";
 </div>
 
 <script>
-  document.querySelectorAll(`[data-cardwall]`).forEach((el: HTMLElement) => {
-    const next = el.querySelector(".next");
-    const previous = el.querySelector(".previous");
-    const updateButtons = () => {
-      if (cards.scrollLeft > 0) {
-        previous.classList.remove("opacity-0");
-      } else {
-        previous.classList.add("opacity-0");
-      }
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll(`[data-cardwall]`).forEach((el: HTMLElement) => {
+      const next = el.querySelector(".next");
+      const previous = el.querySelector(".previous");
+      const updateButtons = () => {
+        if (cards.scrollLeft > 0) {
+          previous.classList.remove("opacity-0");
+        } else {
+          previous.classList.add("opacity-0");
+        }
 
-      if (cards.scrollLeft + cards.clientWidth === cards.scrollWidth) {
-        next.classList.add("opacity-0");
-      } else {
-        next.classList.remove("opacity-0");
-      }
-    };
+        if (cards.scrollLeft + cards.clientWidth === cards.scrollWidth) {
+          next.classList.add("opacity-0");
+        } else {
+          next.classList.remove("opacity-0");
+        }
+      };
 
-    const cards = el.querySelector(`[data-cards]`);
-    next.addEventListener("click", () => {
-      cards.scrollBy({
-        left: window.innerWidth,
-        behavior: "smooth",
+      const cards = el.querySelector(`[data-cards]`);
+      next.addEventListener("click", () => {
+        cards.scrollBy({
+          left: window.innerWidth,
+          behavior: "smooth",
+        });
+
+        setTimeout(() => {
+          updateButtons();
+        }, 500);
       });
 
-      setTimeout(() => {
-        updateButtons();
-      }, 500);
-    });
+      previous.addEventListener("click", () => {
+        cards.scrollBy({
+          left: window.innerWidth * -1,
+          behavior: "smooth",
+        });
 
-    previous.addEventListener("click", () => {
-      cards.scrollBy({
-        left: window.innerWidth * -1,
-        behavior: "smooth",
+        setTimeout(() => {
+          updateButtons();
+        }, 500);
       });
-
-      setTimeout(() => {
-        updateButtons();
-      }, 500);
     });
   });
 </script>
