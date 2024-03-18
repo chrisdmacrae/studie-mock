@@ -1,13 +1,16 @@
 ---
-const { src } = Astro.props;
+const { src, ...props } = Astro.props;
 ---
 
 <div
-  class="cursor-pointer relative min-w-[20rem] w-full md:hover:scale-125 md:hover:brightness-150 transition-all duration-300 hover:drop-shadow-xl hover:z-20"
+  {...props}
+  class="cursor-pointer relative min-w-[20rem] aspect-video w-full md:hover:scale-125 md:hover:brightness-150 transition-all duration-300 hover:drop-shadow-xl hover:z-20"
 >
   <div
-    class="relative aspect-video h-48 w-full p-6 rounded-xl overflow-hidden flex flex-row items-end bg-cover hover:scale-110 transition-all duration-300 translate-y-0"
+    class="relative aspect-video w-full p-6 rounded-xl overflow-hidden flex flex-row items-end bg-cover hover:scale-110 transition-all duration-300 translate-y-0"
     style={{ backgroundImage: `url(${src})`, transform: "translateZ(0)" }}
+    transition:name="lesson-cover"
+    transition:animate="slide"
   >
     <div
       class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50"

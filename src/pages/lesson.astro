@@ -1,0 +1,207 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import { fade, slide } from "astro:transitions";
+import Card from "../components/card.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+    <ViewTransitions />
+  </head>
+  <body class="bg-black p-4">
+    <nav
+      class="fixed top-0 z-50 w-full px-4 py-2 bg-gradient-to-b from-black to-transparent"
+    >
+      <div class="max-w-7xl mx-auto flex flex-row justify-between">
+        <div class="flex flex-row gap-4">
+          <a href="/">
+            <img
+              src="/master-music-method.png"
+              alt="Master Music Method"
+              class="w-24"
+            />
+          </a>
+          <ul class="flex gap-4 items-center justify-between space-x-4 text-sm">
+            <li class="font-bold">
+              <a
+                href="/"
+                class="text-white hover:text-slate-500 transition-all duration-300"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="/about"
+                class="text-white hover:text-slate-500 transition-all duration-300"
+              >
+                Lesson Plans
+              </a>
+            </li>
+            <li>
+              <a
+                href="/blog"
+                class="text-white hover:text-slate-500 transition-all duration-300"
+              >
+                Support
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main
+      class="w-screen h-[calc(100vh-2rem)] pt-[96px] relative"
+      transition:animate={fade({ duration: "0.5s" })}
+    >
+      <div
+        style="background-image: url('/jp-cormier-fiddle-mandolin.jpg')"
+        class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat blur-md"
+        transition:name="lesson-cover"
+      >
+      </div>
+      <div
+        class="relative z-10 bg-gradient-to-b from-transparent via-transparent to-black h-full w-full"
+      >
+        <div
+          class="flex flex-row items-center max-w-7xl mx-auto px-4 py-8 space-x-4 h-full"
+        >
+          <div class="flex flex-col gap-2 -mt-24">
+            <span class="bg-white rounded-xl px-2 w-fit text-sm">14 Videos</span
+            >
+            <h1
+              class="text-6xl font-bold text-white text-center drop-shadow-sm"
+              transition:animate={fade({ duration: "0.3s" })}
+            >
+              Beginner Guitar
+            </h1>
+            <p
+              class="text-white drop-shadow-sm"
+              transition:animate={fade({ duration: "0.3s" })}
+            >
+              J.P teaches you how to play the guitar
+            </p>
+            <button
+              id="open-video"
+              class="px-4 py-2 bg-white rounded-lg text-black w-fit mt-6 hover:bg-white/50"
+              transition:animate={fade({ duration: "0.3s" })}
+            >
+              Start Watching
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <aside
+      class="-mt-24 relative z-10 overflow-hidden"
+      transition:animate="slide"
+    >
+      <div class="">
+        <div class="flex flex-row justify-between items-center pt-8 pb-4">
+          <div class="flex flex-col max-w-7xl mx-auto w-full">
+            <h2
+              class="flex flex-row items-center gap-2 text-2xl font-bold text-white/90"
+            >
+              More from this lesson plan{" "}
+              <span class="bg-white/20 p-1 rounded-full text-xs"> 14 </span>
+            </h2>
+            <p class="text-white"></p>
+          </div>
+        </div>
+        <div
+          class="flex flex-col md:flex-nowrap md:flex-row gap-4 md:h-56 w-screen -mx-4 2xl:[&>:first-child]:ml-64"
+          transition:animate={slide({ duration: "1s" })}
+        >
+          <a href="/lesson" class="block">
+            <Card src="/jp-cormier-fiddle-mandolin.jpg" />
+          </a>
+          <a href="/lesson">
+            <Card src="https://source.unsplash.com/random/900×700/?music" />
+          </a>
+
+          <a href="/lesson">
+            <Card src="https://source.unsplash.com/random/900×700/?guitar" />
+          </a>
+
+          <a href="/lesson">
+            <Card src="https://source.unsplash.com/random/900×700/?band" />
+          </a>
+
+          <a href="/lesson">
+            <Card src="https://source.unsplash.com/random/900×700/?musician" />
+          </a>
+
+          <a href="/lesson">
+            <Card src="https://source.unsplash.com/random/900×700/?musical" />
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <dialog
+      id="video"
+      class="flex flex-col justify-center items-center bg-black w-screen h-screen fixed inset-0 z-0 transition-all duration-300 opacity-0"
+    >
+      <button
+        id="close-video"
+        class="absolute top-4 right-4 w-8 h-8 flex flex-row justify-center items-center bg-white/50 backdrop-blur-md rounded-full text-red-800"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18 18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <video controls class="aspect-video h-full">
+        <source src="/lesson.mp4" type="video/mp4" />
+      </video>
+    </dialog>
+
+    <script>
+      const nav = document.querySelector("nav");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 0) {
+          nav?.classList.add("bg-black/50");
+          nav?.classList.add("backdrop-blur-md");
+          nav?.classList.remove("bg-transparent");
+        } else {
+          nav?.classList.remove("bg-black/50");
+          nav?.classList.remove("backdrop-blur-md");
+          nav?.classList.add("bg-transparent");
+        }
+      });
+
+      const video = document.getElementById("video");
+      document.getElementById("open-video")?.addEventListener("click", () => {
+        document.body.classList.add("overflow-hidden");
+        video?.classList.remove("opacity-0");
+        video?.classList.remove("z-0");
+        video?.classList.add("z-50");
+        video?.querySelector("video")?.play();
+      });
+
+      document.getElementById("close-video")?.addEventListener("click", () => {
+        document.body.classList.remove("overflow-hidden");
+        video?.classList.add("opacity-0");
+        video?.classList.add("z-0");
+        video?.classList.remove("z-50");
+        video?.querySelector("video")?.pause();
+      });
+    </script>
+  </body>
+</html>

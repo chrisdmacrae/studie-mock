@@ -1,4 +1,6 @@
 ---
+import { ViewTransitions } from "astro:transitions";
+import { fade, slide } from "astro:transitions";
 import Card from "../components/card.astro";
 
 const sections = [
@@ -40,6 +42,7 @@ const sections = [
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro</title>
+    <ViewTransitions />
   </head>
   <body class="bg-black p-4">
     <nav
@@ -47,11 +50,13 @@ const sections = [
     >
       <div class="max-w-7xl mx-auto flex flex-row justify-between">
         <div class="flex flex-row gap-4">
-          <img
-            src="/master-music-method.png"
-            alt="Master Music Method"
-            class="w-24"
-          />
+          <a href="/">
+            <img
+              src="/master-music-method.png"
+              alt="Master Music Method"
+              class="w-24"
+            />
+          </a>
           <ul class="flex gap-4 items-center justify-between space-x-4 text-sm">
             <li class="font-bold">
               <a
@@ -82,8 +87,9 @@ const sections = [
       </div>
     </nav>
     <div
-      class="w-screen h-[calc(100vh-72px)] pt-[96px] bg-cover bg-center bg-no-repeat relative brightness-150"
+      class="w-screen h-[calc(100vh-72px)] pt-[96px] relative brightness-150"
       style="background-image: url('violin-closeup.jpg')"
+      transition:animate={fade({ duration: "0.5s" })}
     >
       <div
         class="bg-gradient-to-b from-transparent via-transparent to-black h-full w-full"
@@ -113,11 +119,14 @@ const sections = [
       </div>
     </div>
 
-    <main class="-mt-24 relative z-10 overflow-hidden">
+    <main
+      class="-mt-24 relative z-10 overflow-hidden"
+      transition:animate="slide"
+    >
       {
         sections.map((section) => (
           <div class="">
-            <div class="flex flex-row justify-between items-center pt-8 pb-4">
+            <div class="flex flex-row justify-between items-center pt-24 md:pt-8 pb-4">
               <div class="flex flex-col max-w-7xl mx-auto w-full">
                 <h2 class="flex flex-row items-center gap-2 text-2xl font-bold text-white/90">
                   {section.title}{" "}
@@ -128,13 +137,32 @@ const sections = [
                 <p class="text-white" />
               </div>
             </div>
-            <div class="flex flex-wrap md:flex-nowrap flex-row gap-4 grid-rows-1 md:h-56 w-screen -mx-4 md:[&>:first-child]:ml-64">
-              <Card src="/jp-cormier-fiddle-mandolin.jpg" />
-              <Card src="https://source.unsplash.com/random/900×700/?music" />
-              <Card src="https://source.unsplash.com/random/900×700/?guitar" />
-              <Card src="https://source.unsplash.com/random/900×700/?band" />
-              <Card src="https://source.unsplash.com/random/900×700/?musician" />
-              <Card src="https://source.unsplash.com/random/900×700/?musical" />
+            <div
+              class="flex flex-col md:flex-row md:flex-nowrap gap-4 md:h-56 w-screen -mx-4 2xl:[&>:first-child]:ml-64"
+              transition:animate={slide({ duration: "1s" })}
+            >
+              <a href="/lesson" class="block">
+                <Card src="/jp-cormier-fiddle-mandolin.jpg" />
+              </a>
+              <a href="/lesson">
+                <Card src="https://source.unsplash.com/random/900×700/?music" />
+              </a>
+
+              <a href="/lesson">
+                <Card src="https://source.unsplash.com/random/900×700/?guitar" />
+              </a>
+
+              <a href="/lesson">
+                <Card src="https://source.unsplash.com/random/900×700/?band" />
+              </a>
+
+              <a href="/lesson">
+                <Card src="https://source.unsplash.com/random/900×700/?musician" />
+              </a>
+
+              <a href="/lesson">
+                <Card src="https://source.unsplash.com/random/900×700/?musical" />
+              </a>
             </div>
           </div>
         ))
@@ -142,19 +170,17 @@ const sections = [
     </main>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const nav = document.querySelector("nav");
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 0) {
-            nav.classList.add("bg-black/50");
-            nav.classList.add("backdrop-blur-md");
-            nav.classList.remove("bg-transparent");
-          } else {
-            nav.classList.remove("bg-black/50");
-            nav.classList.remove("backdrop-blur-md");
-            nav.classList.add("bg-transparent");
-          }
-        });
+      const nav = document.querySelector("nav");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 0) {
+          nav.classList.add("bg-black/50");
+          nav.classList.add("backdrop-blur-md");
+          nav.classList.remove("bg-transparent");
+        } else {
+          nav.classList.remove("bg-black/50");
+          nav.classList.remove("backdrop-blur-md");
+          nav.classList.add("bg-transparent");
+        }
       });
     </script>
   </body>
